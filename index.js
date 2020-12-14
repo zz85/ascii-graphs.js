@@ -44,6 +44,7 @@ function make_basic_theme(head, tail, opts) {
 var standard_theme = make_standard_theme("█▉▊▋▌▍▎▏".split('')); // unicode 8 divisions per character block
 // tribute to jim roskind - this is what you see when you visit chrome://histograms/
 var jim_theme = make_basic_theme('-', 'o', { chart_width: 60, divider: '' });
+var spark_line_chars = "█▇▆▅▄▃▁".split('');
 
 var Themes = {
     standard: standard_theme,
@@ -51,7 +52,7 @@ var Themes = {
     equals: make_basic_theme('=', ']', { chart_width: 30 }),
     stars: make_basic_theme('*', ' '),
     pipes: make_standard_theme(['|'], { chart_width: 60 }),
-    sparks: make_standard_theme("█▇▆▅▄▃▁".split(''), { chart_width: 1 }),
+    sparks: make_standard_theme(spark_line_chars, { chart_width: 1 }),
 };
 
 var times = (x) => new Array(x).fill(0);;
@@ -111,9 +112,39 @@ function histogram_format(data, theme, options) {
 }
 
 /* sparkline */
+function spark_line(data, options) {
+    options = options || {};
+    var values = data;
+    var min = options.min || Math.min(...values);
+    var max = options.max || Math.max(...values);
+    max -= min;
 
-function spark_line(values) {
-    values.map()
+    values = values.map(v => v - min);
+    var sum = values.reduce((x, y) => x + y, 0);
+    var avg = sum / values.length;
+
+    var {
+        block_formatter,
+        last_formatter,
+        chart_width,
+        divider,
+    } = options;
+
+    var value_mapper = (v, i) => {
+        // currently support 1 row sparkline
+        var fraction = v / max;
+
+        if (v === 0) return ' ';
+
+        var index = spark_line_chars.length - (fraction * spark_line_chars.length | 0);
+
+        return spark_line_chars[index];
+    };
+
+    var chart = values.map(value_mapper).join('');
+    var stats = `Min: ${min.toFixed(2)} Avg: ${avg.toFixed(2)} Max: ${(max + min).toFixed(2)}`
+
+    return `|${chart}| ${stats}`;
 }
 
 /* CLI helpers */
@@ -141,8 +172,12 @@ function log(lines) {
 /* Lib Exports */
 
 module.exports = {
+    // charting apis
     histogram_format,
-    clear_and_log,
     spark_line,
+
+    // CLI tools
     log,
+    clear_lines,
+    clear_and_log,
 };

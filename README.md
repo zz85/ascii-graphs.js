@@ -1,7 +1,7 @@
 # Ascii Graphs js
 A simple ascii graphing tool in node.js
 
-Currently only supporting Histograms
+Currently only supporting Histogram and Sparkline
 
 ### Basic Usage
 
@@ -134,4 +134,16 @@ loop
    1250 |████████████████████████████▎  | 21.59%
     844 |███████████████████▏           | 14.57%
     820 |██████████████████▌            | 14.15%
+
+sparkline
+
+| ▁▃▄▅▆▇█| Min: 1.00 Avg: 3.50 Max: 8.00
+
+longer sparkline
+
+|▃▃▁▅▄ ▆█▅▆▅▇▆▄▄▆▇▅▁▇▅▃▆▃▄▃▅▃▄▄▅▅▄▄▅▃▁▄▄▅▁▅▇▆| Min: 0.30 Avg: 49.80 Max: 99.42
+
+animate sparkline
+
+|▃▁▁▁▃▄▄▅▆▆▇▇▇█▇▇▇▇▆▆▅▄▄▃▁▁ ▁▃▃▄▅▅▆▆| Min: -1.00 Avg: 0.84 Max: 1.00
 ```

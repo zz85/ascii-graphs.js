@@ -1,6 +1,6 @@
 var lib = require('./index');
 
-var { histogram_format, clear_and_log, log } = lib;
+var { histogram_format, clear_and_log, log, spark_line, clear_lines } = lib;
 
 var data = [0, 1, 2, 3, 4, 5];
 
@@ -46,18 +46,49 @@ var formatted = histogram_format(data, 'sparks');
 log(formatted);
 
 header('loop');
-var i = 0;
 
-function loop() {
-    i++;
-    if (i == 20) return;
+var wait = time => new Promise(accept => {
+    setTimeout(accept, time);
+});
 
-    data = data.map(v => v + Math.random() * 40);
-    var formatted = histogram_format(data, { chart_width: 30 });
-    clear_and_log(formatted);
 
-    setTimeout(loop, 200);
+async function histogram_loop() {
+    for (var i = 0; i < 14; i++) {
+        data = data.map(v => v + Math.random() * 40);
+        var formatted = histogram_format(data, { chart_width: 30 });
+        clear_and_log(formatted);
+        await wait(200);
+    }
 }
 
-loop();
+async function test_sparklines() {
+    var lines = spark_line([1, 2, 3, 4, 5, 6, 7, 8]);
+    header('sparkline');
+    console.log(lines);
 
+    var values = new Array(50).fill(100).map(v => Math.random() * v);
+    var lines = spark_line(values);
+    header('longer sparkline');
+    console.log(lines);
+
+    header('animate sparkline');
+
+    console.log('loading...');
+    for (i = 0; i < 30; i++) {
+        clear_lines(1)
+        values = values.map((_, i) => Math.sin(Date.now() * 0.0005 + i * 0.2));
+        var lines = spark_line(values);
+        console.log(lines);
+        await wait(200);
+
+    }
+}
+
+async function animations() {
+    await histogram_loop();
+
+    await test_sparklines();
+
+}
+
+animations();
