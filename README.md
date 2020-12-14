@@ -1,7 +1,8 @@
 # Ascii Graphs js
+
 A simple ascii graphing tool in node.js (and possibly in the browser)
 
-Currently only supporting Histogram and Sparkline
+Currently only supporting Histogram (Barcharts) and Sparkline
 
 ### Basic Usage
 
@@ -40,6 +41,7 @@ var formatted = histogram_format(data, 'pipes');
 ```
 
 ### Customization
+
 Take a look at `test.js`
 
 ```
@@ -182,3 +184,10 @@ Trend lines
 |▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁| Min: 0.00 Avg: 0.02 Max: 1.00
 
 ```
+
+#### Other projects that makes ascii graphs
+
+- https://github.com/mkaz/termgraph
+- https://github.com/Evizero/UnicodePlots.jl
+- https://github.com/kroitor/asciichart
+- https://github.com/bitly/data_hacks
