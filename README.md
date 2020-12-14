@@ -11,9 +11,26 @@ var formatted = histogram_format(data);
 console.log(formatted.join('\n'));
 ```
 
+### API
+
+```
+var formatted_string = histogram_format(data, theme, options);
+var options = {
+    chart_width /* width of a full bar */
+    divider /* character to mark the start and end of bar
+    block_formatter /* callback for generating a character block */
+    last_formatter /* callback for the last character, can handle partial values */
+    max /* override max value */
+    min /* override min value */
+}
+
+clear_and_log(lines) - clears previously printed lines and updates with new formatted lines
+
+```
+
 ### Themes
 
-sUse one of these: `standard`, `jim`,`equals`,`stars`,`pipes`,`sparks`.
+Use one of these: `standard`, `jim`,`equals`,`stars`,`pipes`,`sparks`.
 
 eg.
 
@@ -23,7 +40,6 @@ var formatted = histogram_format(data, 'pipes');
 ```
 
 ### Customization
-
 Take a look at `test.js`
 
 ```

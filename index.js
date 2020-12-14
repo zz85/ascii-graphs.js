@@ -1,6 +1,5 @@
 
-/// Themes
-var standard_chars = "█▉▊▋▌▍▎▏".split('');
+/* Themes */
 
 // generates a standard theme formatter
 function make_standard_theme(chars, opts) {
@@ -42,7 +41,7 @@ function make_basic_theme(head, tail, opts) {
 }
 
 
-var standard_theme = make_standard_theme(standard_chars);
+var standard_theme = make_standard_theme("█▉▊▋▌▍▎▏".split('')); // unicode 8 divisions per character block
 // tribute to jim roskind - this is what you see when you visit chrome://histograms/
 var jim_theme = make_basic_theme('-', 'o', { chart_width: 60, divider: '' });
 
@@ -61,6 +60,10 @@ function fit(v, w) {
     return Array(w - v.length + 1).join(' ') + v;
 }
 
+/* Histogram */
+
+// data is of array [0, 1, ..., n]
+// or in future [{ value, label }]
 function histogram_format(data, theme, options) {
     if (theme && theme.length) {
         theme = Themes[theme];
@@ -71,13 +74,11 @@ function histogram_format(data, theme, options) {
 
     options = Object.assign({}, theme || standard_theme, options)
 
-    // data is of array [0, 1, ..., n]
-    // or in future [{ value, label }]
-
     var values = data;
-    // normalize min..max TODO make this customizable
-    var min = Math.min(...values, 0);
-    var max = Math.max(...values) - min;
+    var min = options.min || Math.min(...values, 0);
+    var max = options.max || Math.max(...values);
+    // normalize min..max
+    max -= min;
     values = values.map(v => v - min);
     var sum = values.reduce((x, y) => x + y, 0);
 
@@ -88,7 +89,7 @@ function histogram_format(data, theme, options) {
         divider,
     } = options;
 
-    var lines = values.map((v, i) => {
+    var value_mapper = (v, i) => {
         var chars = v / max * chart_width;
         var blocks = times(chars | 0).map(block_formatter);
         var remainder = (chars % 1);
@@ -104,9 +105,15 @@ function histogram_format(data, theme, options) {
         var str = `${value} ${divider}${bar}${Array(remains + 1).join(' ')}${divider} ${percentage}`;
 
         return str;
-    });
+    };
 
-    return lines;
+    return values.map(value_mapper);
+}
+
+/* sparkline */
+
+function spark_line(values) {
+    values.map()
 }
 
 /* CLI helpers */
@@ -136,5 +143,6 @@ function log(lines) {
 module.exports = {
     histogram_format,
     clear_and_log,
+    spark_line,
     log,
 };
