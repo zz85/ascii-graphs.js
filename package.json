@@ -1,0 +1,12 @@
+{
+  "name": "ascii-graphs.js",
+  "version": "1.0.0",
+  "description": "Ascii visualizations",
+  "main": "index.js",
+  "repository": {
+    "url": "git@github.com:zz85/ascii-graphs.js.git",
+    "type": "git"
+  },
+  "author": "Joshua Koo <zz85nus@gmail.com>",
+  "license": "MIT"
+}
