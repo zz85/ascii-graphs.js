@@ -1,5 +1,5 @@
 # Ascii Graphs js
-A simple ascii graphing tool in node.js
+A simple ascii graphing tool in node.js (and possibly in the browser)
 
 Currently only supporting Histogram and Sparkline
 
@@ -30,7 +30,7 @@ clear_and_log(lines) - clears previously printed lines and updates with new form
 
 ### Themes
 
-Use one of these: `standard`, `jim`,`equals`,`stars`,`pipes`,`sparks`.
+Use one of these: `standard`, `jim`,`equals`,`stars`,`pipes`,`sparks`, `bitly`.
 
 eg.
 
@@ -125,6 +125,15 @@ sparks theme
     899 |█ | 26.13%
     473 |▅ | 13.74%
     418 |▅ | 12.17%
+
+bitly theme
+
+    204 |∎∎∎∎∎∎∎∎∎∎∎∎∎∎                                               | 9.60%
+    597 |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎                   | 28.10%
+    164 |∎∎∎∎∎∎∎∎∎∎∎                                                  | 7.74%
+     82 |∎∎∎∎∎                                                        | 3.85%
+    234 |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎                                             | 11.01%
+    844 |∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎∎ | 39.71%
 
 loop
 

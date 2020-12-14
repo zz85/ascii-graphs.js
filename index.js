@@ -40,7 +40,6 @@ function make_basic_theme(head, tail, opts) {
     }, opts);
 }
 
-
 var standard_theme = make_standard_theme("█▉▊▋▌▍▎▏".split('')); // unicode 8 divisions per character block
 // tribute to jim roskind - this is what you see when you visit chrome://histograms/
 var jim_theme = make_basic_theme('-', 'o', { chart_width: 60, divider: '' });
@@ -53,6 +52,8 @@ var Themes = {
     stars: make_basic_theme('*', ' '),
     pipes: make_standard_theme(['|'], { chart_width: 60 }),
     sparks: make_standard_theme(spark_line_chars, { chart_width: 1 }),
+    bitly: make_basic_theme('∎', ' ', { chart_width: 60 }), /* bit.ly data_hacks like */
+
 };
 
 var times = (x) => new Array(x).fill(0);;

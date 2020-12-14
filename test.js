@@ -45,6 +45,10 @@ header('sparks theme')
 var formatted = histogram_format(data, 'sparks');
 log(formatted);
 
+header('bitly theme')
+var formatted = histogram_format(data, 'bitly');
+log(formatted);
+
 header('loop');
 
 var wait = time => new Promise(accept => {
