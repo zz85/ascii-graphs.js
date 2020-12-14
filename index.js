@@ -58,6 +58,7 @@ var Themes = {
 var times = (x) => new Array(x).fill(0);;
 function fit(v, w) {
     w = w || 10;
+    w = Math.max(w, v.length);
     return Array(w - v.length + 1).join(' ') + v;
 }
 
@@ -133,10 +134,11 @@ function spark_line(data, options) {
     var value_mapper = (v, i) => {
         // currently support 1 row sparkline
         var fraction = v / max;
+        fraction = Math.max(Math.min(1, fraction), 0); // clamp 0..1
 
-        if (v === 0) return ' ';
+        // if (v === 0) return ' ';
 
-        var index = spark_line_chars.length - (fraction * spark_line_chars.length | 0);
+        var index = spark_line_chars.length - (fraction * spark_line_chars.length | 0) - 1;
 
         return spark_line_chars[index];
     };
