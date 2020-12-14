@@ -1,7 +1,7 @@
 {
-  "name": "ascii-graphs.js",
+  "name": "ascii-graphs",
   "version": "1.0.0",
-  "description": "Ascii visualizations",
+  "description": "Ascii histogram visualizations for node.js",
   "main": "index.js",
   "repository": {
     "url": "git@github.com:zz85/ascii-graphs.js.git",
