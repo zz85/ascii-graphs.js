@@ -18,6 +18,7 @@ console.log(formatted.join('\n'));
 var formatted_string = histogram_format(data, theme, options);
 var options = {
     chart_width /* width of a full bar */
+    format /* function that will add ANSI escapes to format the chart. You can use chalk package */
     divider /* character to mark the start and end of bar
     block_formatter /* callback for generating a character block */
     last_formatter /* callback for the last character, can handle partial values */
