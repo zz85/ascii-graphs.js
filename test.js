@@ -1,4 +1,4 @@
-var lib = require('./index');
+var lib = require('./');
 
 var { histogram_format, clear_and_log, log, spark_line, clear_lines } = lib;
 

@@ -11,7 +11,7 @@ var {
     log,
     clear_lines,
     clear_and_log,
-} = require('./index');
+} = require('./');
 
 var POLL = .3 * 1000; // poll every .3 seconds
 
