@@ -18,16 +18,14 @@ stdin.on('data', function (chunk) {
 stdin.on('end', function () {
     console.log("Processed " + data.length + " lines");
 
-    data.sort();
+    data.sort((a, b) => a - b);
 
     var percentiles = [];
-    for (var i = 0; i <= 1; i += 0.2) {
+    for (var i = 0; i <= 1; i += 0.10) {
         percentiles.push({
             label: 'p' + (i * 100).toFixed(0),
-            value: i == 1 ? data[data.length - 1] : data[data.length * i | 0],
+            value: data[(data.length - 1) * i | 0],
         });
-
-        // percentiles.push(i == 1 ? data[data.length - 1] : data[data.length * i | 0]);
     }
 
     console.log(percentiles);
