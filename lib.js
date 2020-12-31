@@ -75,9 +75,11 @@ function histogram_format(data, theme, options) {
         theme = null
     }
 
-    options = Object.assign({}, theme || standard_theme, options)
+    options = Object.assign({}, theme || standard_theme, options);
 
     var values = data;
+    if (values[0].label) values = data.map(d => d.value);
+
     var min = options.min || Math.min(...values, 0);
     var max = options.max || Math.max(...values);
     // normalize min..max
@@ -102,10 +104,11 @@ function histogram_format(data, theme, options) {
 
         var percentage = (v / sum * 100).toFixed(2) + '%';
         var value = fit(v.toFixed(0), 7)
-        var label = fit(`Item ${i}` + '', 10) + divider;
+        var label = data[i].label ?
+            fit(`${data[i].label}` + '', 20) + divider :
+            '';
 
-        // ${label}
-        var str = `${value} ${divider}${bar}${Array(remains + 1).join(' ')}${divider} ${percentage}`;
+        var str = `${label} ${value} ${divider}${bar}${Array(remains + 1).join(' ')}${divider} ${percentage}`;
 
         return str;
     };
