@@ -174,13 +174,23 @@ function log(lines) {
 
 /* Lib Exports */
 
-module.exports = {
-    // charting apis
-    histogram_format,
-    spark_line,
+(function () {
+    var exports = {
+        // charting apis
+        histogram_format,
+        spark_line,
 
-    // CLI tools
-    log,
-    clear_lines,
-    clear_and_log,
-};
+        // CLI tools
+        log,
+        clear_lines,
+        clear_and_log,
+    };
+
+    if (typeof module === 'undefined') {
+        // browser support
+        Object.assign(window, { ascii_charts: exports });
+    } else {
+        // nodejs support
+        module.exports = exports;
+    }
+})();

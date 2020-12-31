@@ -1,0 +1,27 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Test Ascii Histogram</title>
+    <meta name="author" content="zz85">
+</head>
+
+<body>
+    <pre id="out"></pre>
+    <script src="index.js"></script>
+    <script>
+        var data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        var format = ascii_charts.histogram_format(data);
+        out.innerHTML += format.join('\n');
+
+        out.innerHTML += '\n\n\n----\n\n\n';
+
+        var format = ascii_charts.histogram_format(data, 'jim');
+        out.innerHTML += format.join('\n');
+
+    </script>
+</body>
+
+</html>
