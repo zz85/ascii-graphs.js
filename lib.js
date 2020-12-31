@@ -89,6 +89,7 @@ function histogram_format(data, theme, options) {
         block_formatter,
         last_formatter,
         chart_width,
+        format = (x) => x,
         divider,
     } = options;
 
@@ -105,7 +106,7 @@ function histogram_format(data, theme, options) {
         var label = fit(`Item ${i}` + '', 10) + divider;
 
         // ${label}
-        var str = `${value} ${divider}${bar}${Array(remains + 1).join(' ')}${divider} ${percentage}`;
+        var str = `${value} ${divider}${format(bar)}${Array(remains + 1).join(' ')}${divider} ${percentage}`;
 
         return str;
     };
