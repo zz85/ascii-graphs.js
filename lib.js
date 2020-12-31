@@ -84,11 +84,13 @@ function histogram_format(data, theme, options) {
     max -= min;
     values = values.map(v => v - min);
     var sum = values.reduce((x, y) => x + y, 0);
+    var max_width = Math.max(...data.map(v => v.toFixed(0).length));
 
     var {
         block_formatter,
         last_formatter,
         chart_width,
+        format = (x) => x,
         divider,
     } = options;
 
@@ -101,11 +103,11 @@ function histogram_format(data, theme, options) {
         var remains = chart_width - bar.length + 1;
 
         var percentage = (v / sum * 100).toFixed(2) + '%';
-        var value = fit(v.toFixed(0), 7)
+        var value = fit(v.toFixed(0), max_width);
         var label = fit(`Item ${i}` + '', 10) + divider;
 
         // ${label}
-        var str = `${value} ${divider}${bar}${Array(remains + 1).join(' ')}${divider} ${percentage}`;
+        var str = `${value} ${divider}${format(bar)}${Array(remains + 1).join(' ')}${divider} ${percentage}`;
 
         return str;
     };
