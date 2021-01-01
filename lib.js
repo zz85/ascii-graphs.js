@@ -105,7 +105,7 @@ function histogram_format(data, theme, options) {
         var percentage = (v / sum * 100).toFixed(2) + '%';
         var value = fit(v.toFixed(0), 7)
         var label = data[i].label ?
-            fit(`${data[i].label}` + '', 20) + divider :
+            fit(`${data[i].label}` + '', 20) + '  ' + divider :
             '';
 
         var str = `${label} ${value} ${divider}${bar}${Array(remains + 1).join(' ')}${divider} ${percentage}`;

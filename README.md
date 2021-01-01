@@ -37,7 +37,7 @@ clear_and_log(lines) - clears previously printed lines and updates with new form
 ```sh
 echo "Array(20).fill(0).map(_=>Math.random() * 1000 | 0).forEach(x => console.log(x))"  | node - | node stdin
 
-echo "Array(20).fill(0).map(_=>Math.random() * 1000 | 0).forEach(x => console.log(x))"  | node - | node stdin-histogram
+echo "Array(2000).fill(0).map(_=>Math.random() * 10000 | 0).forEach(x => console.log(x))"  | node - | node stdin-histogram
 ```
 
 ```
