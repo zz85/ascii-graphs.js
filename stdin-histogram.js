@@ -84,6 +84,7 @@ class GenericBins {
         this.binner = binner.keyer;
         this.labeller = binner.labeller || ((key) => `Bin ${key}`);
         this.generator = binner.generator;
+        this.sum = 0;
     };
 
     add(value) {
@@ -94,6 +95,7 @@ class GenericBins {
         }
 
         this.map.set(key, this.map.get(key) + 1);
+        this.sum++;
     }
 
     data() {
@@ -105,6 +107,10 @@ class GenericBins {
             label: this.labeller(key),
             value: this.map.get(key) || 0
         }));
+    }
+
+    len() {
+        return this.sum;
     }
 }
 
@@ -121,11 +127,16 @@ class AllBins {
     data() {
         console.log('implement me!');
     }
+
+    len() {
+        return this.dataset.length;
+    }
 }
 
-class TenBins extends AllBins {
-    constructor() {
+class NBins extends AllBins {
+    constructor(n = 10) {
         super();
+        this.n = n;
     }
     data() {
         var dataset = this.dataset;
@@ -139,15 +150,15 @@ class TenBins extends AllBins {
         var i = 0;
 
         var output = [];
-        for (var val = min; val <= max && i < dataset.length; val += range / 10) {
+        for (var val = min; val <= max && i < dataset.length; val += range / this.n) {
             var count = 0;
-            while (dataset[i] < (val + range / 10)) {
+            while (dataset[i] < (val + range / this.n)) {
                 count++;
                 i++;
             }
 
             output.push({
-                label: `${val | 0} - ${(val + range / 10 - 1) | 0}`,
+                label: `${val | 0} - ${(val + range / this.n - 1) | 0}`,
                 value: count,
             });
         }
@@ -158,12 +169,10 @@ class TenBins extends AllBins {
 
 
 const stdin = process.stdin;
-let data = [];
-
 stdin.setEncoding('utf8');
 
 var histogram = new GenericBins(unique_multiple(10000));  // golden // unique // power_two; // unique_ints // unique_100s // unique_1000s
-var histogram = new TenBins();
+var histogram = new NBins();
 
 stdin.on('data', function (chunk) {
     var lines = chunk.split('\n');
@@ -179,33 +188,14 @@ stdin.on('data', function (chunk) {
 });
 
 stdin.on('end', function () {
-    console.log("Processed " + data.length + " lines");
+    console.log("Processed " + histogram.len() + " lines");
 
-    // data.sort(sorter);
-
-    // var percentiles = [];
-    // for (var i = 0; i <= 1; i += 0.10) {
-    //     percentiles.push({
-    //         label: 'p' + (i * 100).toFixed(0),
-    //         value: data[(data.length - 1) * i | 0],
-    //     });
-    // }
-
-    // console.log(percentiles);
-
-    // var formatted = histogram_format(percentiles);
-    // console.log('histogram percentiles');
-    // console.log(formatted.join('\n'));
-
-
-    console.log('histogram', histogram);
+    // console.log('histogram', histogram);
     var histo_data = histogram.data();
-
-
-    console.log('data', histo_data);
+    // console.log('data', histo_data);
 
     var formatted = histogram_format(histo_data);
-    console.log('histo');
+    console.log('histogram');
     console.log(formatted.join('\n'));
 });
 
